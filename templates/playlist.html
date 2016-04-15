@@ -42,82 +42,75 @@
 			</div><!-- end header-bottom -->
 		</div><!-- end header -->	
 		<div id="wrapper">
-			<section id="playlists">
+			<section id="view-playlist-wrapper">
 				<div class="row">
 					<div class="small-12 columns">
-						<h4>Top Playlists</h4>
 					</div>
 				</div><!-- end row -->
-				<div id="index" class="row small-up-1 large-up-2">
-					<div class="column">
-						<div class="playlist">
-							<div class="row">
-								<div class="small-12 columns">
-									<div class="playlist-byline">
-										<div class="user-avatar"></div>
-										<div class="playlist-posted">Posted by <span class="author">dantobias1986</span> on <span class="date">April 13, 2016</span></div>
-									</div>
-								</div>
-							</div><!-- end row -->
-							<div class="row">
-								<div class="small-3 large-5 columns">
-									<div class="album-cover">
-										<img src="css/imgs/320x320.png" />
-										<i class="fa fa-play-circle-o" aria-hidden="true"></i>
-									</div><!-- end album-cover -->
-								</div>
-								<div class="small-9 large-7 columns">
-									<h3><a href="playlist.php">Really Awesome Playlist Name</a></h3>
-									<div class="playlist-stats">
-										<span class="playlist-length"><i class="fa fa-clock-o" aria-hidden="true"></i>0:50</span>
-										<span class="playlist-tracks"><i class="fa fa-list" aria-hidden="true"></i>8</span>
-										<span class="num-follows"><i class="fa fa-plus" aria-hidden="true"></i>20</span>
-									</div>
-									<ul class="tags">
-										<li><a href="">Indie Folk</a></li>
-										<li><a href="">Bluegrass</a></li>
-										<li><a href="">Indie Rock</a></li>
-										<li><a href="">Another Tag</a></li>
-										<li><a href="">A Much Longer Tag</a></li>
-									</ul>							
-									<div class=""></div>
-								</div>
-							</div><!-- end row -->
-						</div><!-- end playlist -->
-					</div><!-- end column -->
-					<div class="column">
-						<div class="playlist">
-							<div class="row">
-								<div class="small-12 columns">
-									<div class="playlist-byline">
-										<div class="user-avatar"></div>
-										<div class="playlist-posted">Posted by <span class="author">dantobias1986</span> on <span class="date">April 13, 2016</span></div>
-									</div>
-								</div>
-							</div><!-- end row -->
-							<div class="row">
-								<div class="small-3 large-5 columns">
-									<div class="album-cover">
-										<img src="css/imgs/320x320.png" />
-										<i class="fa fa-play-circle-o" aria-hidden="true"></i>
-									</div><!-- end album-cover -->
-								</div>
-								<div class="small-9 large-7 columns">
-									<h3><a href="playlist.php">Really Awesome Playlist Name That's Even Longer</a></h3>
-									<div class="playlist-stats">
-										<span class="playlist-length"><i class="fa fa-clock-o" aria-hidden="true"></i>1:00</span>
-										<span class="playlist-tracks"><i class="fa fa-list" aria-hidden="true"></i>12</span>
-										<span class="num-follows"><i class="fa fa-plus" aria-hidden="true"></i>5</span>
-									</div>
-									<ul class="tags">
-										<li><a href="">Indie Folk</a></li>
-										<li><a href="">Bluegrass</a></li>
-										<li><a href="">Indie Rock</a></li>
-									</ul>							
-								</div>
-							</div><!-- end row -->
-						</div><!-- end playlist -->
-					</div><!-- end column -->
+				<div id="playlist-info" class="row">
+					<div class="small-12 medium-3 columns">
+						<img src="css/imgs/320x320.png" />
+					</div>
+					<div class="small-12 medium-9 columns">
+						<h2>Really Awesome Playlist Name</h2>
+						<div class="playlist-stats">
+							<span class="playlist-length"><i class="fa fa-clock-o" aria-hidden="true"></i>0:50</span>
+							<span class="playlist-tracks"><i class="fa fa-list" aria-hidden="true"></i>8</span>
+							<span class="num-follows"><i class="fa fa-plus" aria-hidden="true"></i>20</span>
+						</div>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae luctus dui. Aliquam ut luctus ipsum. Pellentesque at augue quis nisl molestie pharetra at ut odio. Quisque cursus cursus neque, eu rutrum ipsum ultrices rhoncus. Curabitur consequat tellus elit, ut luctus elit hendrerit ac.</p>						
+						<button class="button" id="play-now">Play Now</button>
+						<button class="button" id="follow-playlist">Follow on Spotify</button>
+					</div><!-- end small-12 -->
+				</div><!-- end row -->
+				<div id="playlist-wrapper" class="row">
+					<div class="small-12 columns">
+						<h4>Your Playlist</h4>
+						<div class="playlistHeading">
+							<div>Song</div>
+							<div>Artist</div>
+							<div>Album</div>
+							<div>Duration</div>
+						</div>
+						<ol id="current-playlist">
+							<li class="track">
+							  <div class="song">Ayy Lmao</div>
+							  <div class="artist">Alien Band</div>
+							  <div class="album">Rosewell</div>
+							  <div class="duration">4:20</div>
+							</li>
+							<li class="track">
+							  <div class="song">I Know Nothing</div>
+							  <div class="artist">Jon Snow &amp; the Longclaws</div>
+							  <div class="album">Direwolf B-Sides: Ghost</div>
+							  <div class="duration">3:33</div>
+							</li>    
+							<li class="track">
+							  <div class="song">Ayy Lmao</div>
+							  <div class="artist">Alien Band</div>
+							  <div class="album">Rosewell</div>
+							  <div class="duration">4:20</div>
+							</li>
+							<li class="track">
+							  <div class="song">I Know Nothing</div>
+							  <div class="artist">Jon Snow &amp; the Longclaws</div>
+							  <div class="album">Direwolf B-Sides: Ghost</div>
+							  <div class="duration">3:33</div>
+							</li>    
+							<li class="track">
+							  <div class="song">Ayy Lmao</div>
+							  <div class="artist">Alien Band</div>
+							  <div class="album">Rosewell</div>
+							  <div class="duration">4:20</div>
+							</li>
+							<li class="track">
+							  <div class="song">I Know Nothing</div>
+							  <div class="artist">Jon Snow &amp; the Longclaws</div>
+							  <div class="album">Direwolf B-Sides: Ghost</div>
+							  <div class="duration">3:33</div>
+							</li>    
+						</ol>
+					</div><!-- end small-12 -->				
 				</div><!-- end row -->
 			</section>
 		</div><!-- end wrapper -->
