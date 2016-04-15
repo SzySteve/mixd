@@ -1,0 +1,168 @@
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Spotify Playlists</title>
+		<link href="https://fonts.googleapis.com/css?family=Arvo:400,700" rel="stylesheet" type="text/css">
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="../static/css/font-awesome.css">
+		<link rel="stylesheet" href="../static/css/foundation.css">
+		<link rel="stylesheet" href="../static/css/style.css">
+	</head>
+	<body>
+		<div id="header">
+			<div id="header-top">
+				<div class="row">
+					<div class="small-12 medium-4 columns">
+						<h3 id="logo"><a href="/">Spotify Playlists</a></h3>
+					</div>
+					<div class="hide-for-small-only medium-8 columns">
+					</div>
+				</div><!-- end row -->
+			</div><!-- end header-top -->
+			<div id="header-bottom">
+				<div class="row">
+					<div class="small-12 large-6 columns">
+						<form id="search">
+							<div id="search-field">
+								<input type="search" placeholder="search playlists" />
+								<input type="submit" id="search-submit" value="Search" />
+							</div>
+						</form>
+					</div>
+					<div class="small-12 large-6 columns">
+						<div id="add-wrapper">
+							<span class="or">or</span>
+							<button id="add-playlist" class="button">Add a Playlist</button>						
+						</div>
+					</div>
+				</div><!-- end row -->
+			</div><!-- end header-bottom -->
+		</div><!-- end header -->	
+		<div id="wrapper">
+			<section id="view-playlist-wrapper">
+				<div class="row">
+					<div class="small-12 columns">
+					</div>
+				</div><!-- end row -->
+				<div id="playlist-info" class="row">
+					<div class="small-12 medium-3 columns">
+						<img src="css/imgs/320x320.png" />
+					</div>
+					<div class="small-12 medium-9 columns">
+						<h2>Really Awesome Playlist Name</h2>
+						<div class="playlist-stats">
+							<span class="playlist-length"><i class="fa fa-clock-o" aria-hidden="true"></i>0:50</span>
+							<span class="playlist-tracks"><i class="fa fa-list" aria-hidden="true"></i>8</span>
+							<span class="num-follows"><i class="fa fa-plus" aria-hidden="true"></i>20</span>
+						</div>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae luctus dui. Aliquam ut luctus ipsum. Pellentesque at augue quis nisl molestie pharetra at ut odio. Quisque cursus cursus neque, eu rutrum ipsum ultrices rhoncus. Curabitur consequat tellus elit, ut luctus elit hendrerit ac.</p>						
+						<button class="button" id="play-now">Play Now</button>
+						<button class="button" id="follow-playlist">Follow on Spotify</button>
+					</div><!-- end small-12 -->
+				</div><!-- end row -->
+				<div id="playlist-wrapper" class="row">
+					<div class="small-12 columns">
+						<h4>Your Playlist</h4>
+						<div class="playlistHeading">
+							<div>Song</div>
+							<div>Artist</div>
+							<div>Album</div>
+							<div>Duration</div>
+						</div>
+						<ol id="current-playlist">
+							<li class="track">
+							  <div class="song">Ayy Lmao</div>
+							  <div class="artist">Alien Band</div>
+							  <div class="album">Rosewell</div>
+							  <div class="duration">4:20</div>
+							</li>
+							<li class="track">
+							  <div class="song">I Know Nothing</div>
+							  <div class="artist">Jon Snow &amp; the Longclaws</div>
+							  <div class="album">Direwolf B-Sides: Ghost</div>
+							  <div class="duration">3:33</div>
+							</li>    
+							<li class="track">
+							  <div class="song">Ayy Lmao</div>
+							  <div class="artist">Alien Band</div>
+							  <div class="album">Rosewell</div>
+							  <div class="duration">4:20</div>
+							</li>
+							<li class="track">
+							  <div class="song">I Know Nothing</div>
+							  <div class="artist">Jon Snow &amp; the Longclaws</div>
+							  <div class="album">Direwolf B-Sides: Ghost</div>
+							  <div class="duration">3:33</div>
+							</li>    
+							<li class="track">
+							  <div class="song">Ayy Lmao</div>
+							  <div class="artist">Alien Band</div>
+							  <div class="album">Rosewell</div>
+							  <div class="duration">4:20</div>
+							</li>
+							<li class="track">
+							  <div class="song">I Know Nothing</div>
+							  <div class="artist">Jon Snow &amp; the Longclaws</div>
+							  <div class="album">Direwolf B-Sides: Ghost</div>
+							  <div class="duration">3:33</div>
+							</li>    
+						</ol>
+					</div><!-- end small-12 -->				
+				</div><!-- end row -->
+			</section>
+		</div><!-- end wrapper -->
+		<div id="footer">
+			<div class="row">
+				<div class="small-12 columns">
+					<p>Spotify Playlists © 2016. All Rights Reserved.</p>
+				</div>
+			</div>
+		</div><!-- end footer -->
+		<script src="../static/js/vendor/jquery.js"></script>
+		<script src="../static/js/vendor/jquery-sortable.js"></script>
+		<script src="../static/js/vendor/what-input.js"></script>
+		<script src="../static/js/vendor/foundation.min.js"></script>
+		
+		<script type="text/javascript">
+		  var adjustment;
+		  $("ul.sortable").sortable({
+		  group: 'sortable',
+		  pullPlaceholder: false,
+		  // animation on drop
+		  onDrop: function  ($item, container, _super) {
+		    var $clonedItem = $('<li/>').css({height: 0});
+		    $item.before($clonedItem);
+		    $clonedItem.animate({'height': $item.height()});
+		    $item.animate($clonedItem.position(), function  () {
+		      $clonedItem.detach();
+		      _super($item, container);
+		    });
+		  },
+		  // set $item relative to cursor position
+		  onDragStart: function ($item, container, _super) {
+		    var offset = $item.offset(),
+		        pointer = container.rootGroup.pointer;
+		    adjustment = {
+		      left: pointer.left - offset.left,
+		      top: pointer.top - offset.top
+		    };
+		    _super($item, container);
+		  },
+		  onDrag: function ($item, position) {
+		    $item.css({
+		      left: position.left - adjustment.left,
+		      top: position.top - adjustment.top
+		    });
+		  }
+		  }); 
+		</script>
+		<script>
+		   $(document).ready(function() {
+		      $(document).foundation();
+		   })
+		</script>
+	</body>
+</html>
