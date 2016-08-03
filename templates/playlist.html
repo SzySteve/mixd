@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!doctype html>
 <html class="no-js" lang="en" dir="ltr">
 	<head>
@@ -7,9 +8,9 @@
 		<title>Spotify Playlists</title>
 		<link href="https://fonts.googleapis.com/css?family=Arvo:400,700" rel="stylesheet" type="text/css">
 		<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet" type="text/css">
-		<link rel="stylesheet" href="../playlist/static/css/font-awesome.css">
-		<link rel="stylesheet" href="../playlist/static/css/foundation.css">
-		<link rel="stylesheet" href="../playlist/static/css/style.css">
+		<link rel="stylesheet" href="{% static "css/font-awesome.css" %}">
+        <link rel="stylesheet" href="{% static "css/foundation.css" %}">
+        <link rel="stylesheet" href="{% static "css/style.css" %}">
 	</head>
 	<body>
 		<div id="header">
@@ -49,16 +50,16 @@
 				</div><!-- end row -->
 				<div id="playlist-info" class="row">
 					<div class="small-12 medium-3 columns">
-						<img src="css/imgs/320x320.png" />
+						<img src="{{ playlist.images.0.url }}" />
 					</div>
 					<div class="small-12 medium-9 columns">
-						<h2>Really Awesome Playlist Name</h2>
+						<h2> {{ playlist.name }}</h2>
 						<div class="playlist-stats">
 							<span class="playlist-length"><i class="fa fa-clock-o" aria-hidden="true"></i>0:50</span>
-							<span class="playlist-tracks"><i class="fa fa-list" aria-hidden="true"></i>8</span>
-							<span class="num-follows"><i class="fa fa-plus" aria-hidden="true"></i>20</span>
+							<span class="playlist-tracks"><i class="fa fa-list" aria-hidden="true"></i>{{ playlist.tracks.total }}</span>
+							<span class="num-follows"><i class="fa fa-plus" aria-hidden="true"></i>{{ playlist.followers.total }}</span>
 						</div>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae luctus dui. Aliquam ut luctus ipsum. Pellentesque at augue quis nisl molestie pharetra at ut odio. Quisque cursus cursus neque, eu rutrum ipsum ultrices rhoncus. Curabitur consequat tellus elit, ut luctus elit hendrerit ac.</p>						
+						<p>{{ description }}</p>
 						<button class="button" id="play-now">Play Now</button>
 						<button class="button" id="follow-playlist">Follow on Spotify</button>
 					</div><!-- end small-12 -->
@@ -70,45 +71,17 @@
 							<div>Song</div>
 							<div>Artist</div>
 							<div>Album</div>
-							<div>Duration</div>
+{#							<div>Duration</div>#}
 						</div>
 						<ol id="current-playlist">
-							<li class="track">
-							  <div class="song">Ayy Lmao</div>
-							  <div class="artist">Alien Band</div>
-							  <div class="album">Rosewell</div>
-							  <div class="duration">4:20</div>
-							</li>
-							<li class="track">
-							  <div class="song">I Know Nothing</div>
-							  <div class="artist">Jon Snow &amp; the Longclaws</div>
-							  <div class="album">Direwolf B-Sides: Ghost</div>
-							  <div class="duration">3:33</div>
-							</li>    
-							<li class="track">
-							  <div class="song">Ayy Lmao</div>
-							  <div class="artist">Alien Band</div>
-							  <div class="album">Rosewell</div>
-							  <div class="duration">4:20</div>
-							</li>
-							<li class="track">
-							  <div class="song">I Know Nothing</div>
-							  <div class="artist">Jon Snow &amp; the Longclaws</div>
-							  <div class="album">Direwolf B-Sides: Ghost</div>
-							  <div class="duration">3:33</div>
-							</li>    
-							<li class="track">
-							  <div class="song">Ayy Lmao</div>
-							  <div class="artist">Alien Band</div>
-							  <div class="album">Rosewell</div>
-							  <div class="duration">4:20</div>
-							</li>
-							<li class="track">
-							  <div class="song">I Know Nothing</div>
-							  <div class="artist">Jon Snow &amp; the Longclaws</div>
-							  <div class="album">Direwolf B-Sides: Ghost</div>
-							  <div class="duration">3:33</div>
-							</li>    
+                            {% for track in playlist.tracks.items %}
+                                <li class="track">
+                                  <div class="song">{{ track.track.name }}</div>
+                                  <div class="artist">{{ track.track.artists.0.name }}</div>
+                                  <div class="album">{{ track.track.album.name }}</div>
+{#                                  <div class="duration">{{ track.track.duration_ms}}</div>#}
+                                </li>
+                            {% endfor %}
 						</ol>
 					</div><!-- end small-12 -->				
 				</div><!-- end row -->
@@ -121,44 +94,9 @@
 				</div>
 			</div>
 		</div><!-- end footer -->
-		<script src="http://www.theresamonaco.com/playlists/js/vendor/jquery.js"></script>
-		<script src="http://www.theresamonaco.com/playlists/js/vendor/jquery-sortable.js"></script>
-		<script src="http://www.theresamonaco.com/playlists/js/vendor/what-input.js"></script>
-		<script src="http://www.theresamonaco.com/playlists/js/vendor/foundation.min.js"></script>
-		
-		<script type="text/javascript">
-		  var adjustment;
-		  $("ul.sortable").sortable({
-		  group: 'sortable',
-		  pullPlaceholder: false,
-		  // animation on drop
-		  onDrop: function  ($item, container, _super) {
-		    var $clonedItem = $('<li/>').css({height: 0});
-		    $item.before($clonedItem);
-		    $clonedItem.animate({'height': $item.height()});
-		    $item.animate($clonedItem.position(), function  () {
-		      $clonedItem.detach();
-		      _super($item, container);
-		    });
-		  },
-		  // set $item relative to cursor position
-		  onDragStart: function ($item, container, _super) {
-		    var offset = $item.offset(),
-		        pointer = container.rootGroup.pointer;
-		    adjustment = {
-		      left: pointer.left - offset.left,
-		      top: pointer.top - offset.top
-		    };
-		    _super($item, container);
-		  },
-		  onDrag: function ($item, position) {
-		    $item.css({
-		      left: position.left - adjustment.left,
-		      top: position.top - adjustment.top
-		    });
-		  }
-		  }); 
-		</script>
+		<script src="{% static "js/vendor/jquery.js" %}"></script>>
+		<script src="{% static "js/vendor/what-input.js" %}"></script>
+		<script src="{% static "js/vendor/foundation.min.js" %}"></script>
 		<script>
 		   $(document).ready(function() {
 		      $(document).foundation();

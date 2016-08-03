@@ -50,75 +50,39 @@
 					</div>
 				</div><!-- end row -->
 				<div id="index" class="row small-up-1 large-up-2">
-					<div class="column">
-						<div class="playlist">
-							<div class="row">
-								<div class="small-12 columns">
-									<div class="playlist-byline">
-										<div class="user-avatar"></div>
-										<div class="playlist-posted">Posted by <span class="author">dantobias1986</span> on <span class="date">April 13, 2016</span></div>
-									</div>
-								</div>
-							</div><!-- end row -->
-							<div class="row">
-								<div class="small-3 large-5 columns">
-									<div class="album-cover">
-										<img src="{% static "imgs/320x320.png" %}" />
-										<i class="fa fa-play-circle-o" aria-hidden="true"></i>
-									</div><!-- end album-cover -->
-								</div>
-								<div class="small-9 large-7 columns">
-									<h3><a href="playlist.php">Really Awesome Playlist Name</a></h3>
-									<div class="playlist-stats">
-										<span class="playlist-length"><i class="fa fa-clock-o" aria-hidden="true"></i>0:50</span>
-										<span class="playlist-tracks"><i class="fa fa-list" aria-hidden="true"></i>8</span>
-										<span class="num-follows"><i class="fa fa-plus" aria-hidden="true"></i>20</span>
-									</div>
-									<ul class="tags">
-										<li><a href="">Indie Folk</a></li>
-										<li><a href="">Bluegrass</a></li>
-										<li><a href="">Indie Rock</a></li>
-										<li><a href="">Another Tag</a></li>
-										<li><a href="">A Much Longer Tag</a></li>
-									</ul>							
-									<div class=""></div>
-								</div>
-							</div><!-- end row -->
-						</div><!-- end playlist -->
-					</div><!-- end column -->
-					<div class="column">
-						<div class="playlist">
-							<div class="row">
-								<div class="small-12 columns">
-									<div class="playlist-byline">
-										<div class="user-avatar"></div>
-										<div class="playlist-posted">Posted by <span class="author">dantobias1986</span> on <span class="date">April 13, 2016</span></div>
-									</div>
-								</div>
-							</div><!-- end row -->
-							<div class="row">
-								<div class="small-3 large-5 columns">
-									<div class="album-cover">
-										<img src="{% static "imgs/320x320.png" %}" />
-										<i class="fa fa-play-circle-o" aria-hidden="true"></i>
-									</div><!-- end album-cover -->
-								</div>
-								<div class="small-9 large-7 columns">
-									<h3><a href="playlist.php">Really Awesome Playlist Name That's Even Longer</a></h3>
-									<div class="playlist-stats">
-										<span class="playlist-length"><i class="fa fa-clock-o" aria-hidden="true"></i>1:00</span>
-										<span class="playlist-tracks"><i class="fa fa-list" aria-hidden="true"></i>12</span>
-										<span class="num-follows"><i class="fa fa-plus" aria-hidden="true"></i>5</span>
-									</div>
-									<ul class="tags">
-										<li><a href="">Indie Folk</a></li>
-										<li><a href="">Bluegrass</a></li>
-										<li><a href="">Indie Rock</a></li>
-									</ul>							
-								</div>
-							</div><!-- end row -->
-						</div><!-- end playlist -->
-					</div><!-- end column -->
+                    {% for playlist in playlists %}
+                        <div class="column">
+                            <div class="playlist">
+                                <div class="row">
+                                    <div class="small-12 columns">
+                                        <div class="playlist-byline">
+                                            <div class="user-avatar"></div>
+                                            <div class="playlist-posted">Created by <span class="author">{{ playlist.owner.display_name }}</span></div>
+                                        </div>
+                                    </div>
+                                </div><!-- end row -->
+                                <div class="row">
+                                    <div class="small-3 large-5 columns">
+                                        <div class="album-cover">
+                                            <img src="{{ playlist.images.0.url }}" />
+                                            <i class="fa fa-play-circle-o" aria-hidden="true"></i>
+                                        </div><!-- end album-cover -->
+                                    </div>
+                                    <div class="small-9 large-7 columns">
+                                        <h3><a href="playlist_detail?id={{ playlist.mixd_id }}">{{ playlist.name }}</a></h3>
+                                        <div class="playlist-stats">
+                                            <span class="playlist-tracks"><i class="fa fa-list" aria-hidden="true"></i>{{ playlist.tracks.total }}</span>
+                                            <span class="num-follows"><i class="fa fa-plus" aria-hidden="true"></i>{{ playlist.followers.total }}</span>
+                                        </div>
+                                        <ul class="tags">
+                                            <li><a href="">Example Tag</a></li>
+                                        </ul>
+                                        <div class=""></div>
+                                    </div>
+                                </div><!-- end row -->
+                            </div><!-- end playlist -->
+                        </div><!-- end column -->
+                    {% endfor %}
 				</div><!-- end row -->
 			</section>
 		</div><!-- end wrapper -->
@@ -130,43 +94,8 @@
 			</div>
 		</div><!-- end footer -->
 		<script src="{% static "js/vendor/jquery.js" %}"></script>
-		<script src="{% static "js/vendor/jquery-sortable.js" %}"></script>
 		<script src="{% static "js/vendor/what-input.js" %}"></script>
 		<script src="{% static "js/vendor/foundation.min.js" %}"></script>
-		
-		<script type="text/javascript">
-		  var adjustment;
-		  $("ul.sortable").sortable({
-		  group: 'sortable',
-		  pullPlaceholder: false,
-		  // animation on drop
-		  onDrop: function  ($item, container, _super) {
-		    var $clonedItem = $('<li/>').css({height: 0});
-		    $item.before($clonedItem);
-		    $clonedItem.animate({'height': $item.height()});
-		    $item.animate($clonedItem.position(), function  () {
-		      $clonedItem.detach();
-		      _super($item, container);
-		    });
-		  },
-		  // set $item relative to cursor position
-		  onDragStart: function ($item, container, _super) {
-		    var offset = $item.offset(),
-		        pointer = container.rootGroup.pointer;
-		    adjustment = {
-		      left: pointer.left - offset.left,
-		      top: pointer.top - offset.top
-		    };
-		    _super($item, container);
-		  },
-		  onDrag: function ($item, position) {
-		    $item.css({
-		      left: position.left - adjustment.left,
-		      top: position.top - adjustment.top
-		    });
-		  }
-		  }); 
-		</script>
 		<script>
 		   $(document).ready(function() {
 		      $(document).foundation();
