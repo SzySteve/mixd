@@ -1,7 +1,6 @@
 from __future__ import unicode_literals
 
 from django.db import models
-import json
 
 TAG_CATEGORY_MOOD = "mood"
 TAG_CATEGORY_GENRE = "genre"
