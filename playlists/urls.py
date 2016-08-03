@@ -20,7 +20,8 @@ import playlist.views as playlist_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^playlist$', playlist_views.index),
+    url(r'^$', playlist_views.index),
     url(r'^playlistseed', playlist_views.seed),
     url(r'^playlisttags', playlist_views.tags),
+    # url(r'^page', playlist_views.page),
 ]

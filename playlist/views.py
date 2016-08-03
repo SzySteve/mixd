@@ -1,16 +1,15 @@
 from django.shortcuts import render
+# from django.template import loader
 from django.http.response import HttpResponse
-import spotipy
-import spotipy.util as util
 from models import Playlist, Tag, TAG_CATEGORY_MOOD
 from spotipy_client import sp, steve_spotify_id, playlist_id
 from suggest_tags import suggest_tags
 import json
 
 # Create your views here.
-def index(request):
-    playlists = Playlist.objects.all()
-    return HttpResponse(str([p.name for p in playlists]))
+# def index(request):
+#     playlists = Playlist.objects.all()
+#     return HttpResponse(str([p.name for p in playlists]))
 
 def seed(request):
     playlists = sp.user_playlists(steve_spotify_id, limit=50)['items']
@@ -32,3 +31,5 @@ def seedTags(request):
     Tag.objects.create(name="Workout", category=TAG_CATEGORY_MOOD)
     Tag.objects.create(name="Relaxed", category=TAG_CATEGORY_MOOD)
 
+def index(request):
+    return render(request, 'index.html', {})

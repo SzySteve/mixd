@@ -56,7 +56,7 @@ ROOT_URLCONF = 'playlists.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['/Users/steve/git/mixd/templates/'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -68,6 +68,16 @@ TEMPLATES = [
         },
     },
 ]
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.9/howto/static-files/
+
+# STATIC_ROOT = ''
+
+STATIC_URL = '/static/'
+
+
+STATICFILE_DIRS = ['/Users/steve/git/mixd/playlists/static/']
 
 WSGI_APPLICATION = 'playlists.wsgi.application'
 
@@ -116,7 +126,4 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.9/howto/static-files/
 
-STATIC_URL = '/static/'
