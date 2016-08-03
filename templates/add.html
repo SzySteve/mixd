@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load staticfiles %}
 {% block content %}
     <div id="wrapper">
         <section id="playlists">
@@ -10,8 +10,11 @@
             <div class="row">
                 <div class="small-12 columns">
                     <div id="add-playlist-uri">
-                        <input type="text" placeholder="Paste in your Spotify URI" />
-                        <input type="submit" class="button" value="Add Playlist" />
+                        <form action="share" method="post">
+                            {% csrf_token %}
+                            <input type="text" name="uri" placeholder="Paste in your Spotify URI" />
+                            <input type="submit" class="button" value="Add Playlist"/>
+                        </form>
                         <div class="row">
                             <div class="small-12 medium-6 columns">
                                 <h4>To get your Spotify playlist URI:</h4>
@@ -22,7 +25,7 @@
                                 </ol>
                             </div>
                             <div class="small-12 medium-6 columns">
-                                <img src="css/imgs/spotify-uri.png" />
+                                <img src="{% static "imgs/spotify-uri.png" %}" />
                             </div>
                         </div><!-- end nested row -->
                     </div>

@@ -49,3 +49,14 @@ def detail(request):
     playlist = sp.user_playlist(user=steve_spotify_id, playlist_id=mixd_playlist.spotify_id)
     return render(request, 'playlist.html', {'playlist': playlist,
                                              'description': mixd_playlist.description})
+def add(request):
+    return render(request, 'add.html', {})
+
+def share(request):
+    uri = request.POST['uri']
+    # spotify:user:1210159879:playlist:0v5PyzDU1jZIN7zgvpFfFb
+    tokens = uri.split(':')
+    user = tokens[2]
+    pid = tokens[4]
+    playlist = sp.user_playlist(user=user, playlist_id=pid)
+    return render(request, 'tag-and-share.html', {'playlist': playlist})
