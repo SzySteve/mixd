@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!doctype html>
 <html class="no-js" lang="en" dir="ltr">
 	<head>
@@ -7,9 +8,9 @@
 		<title>Spotify Playlists</title>
 		<link href="https://fonts.googleapis.com/css?family=Arvo:400,700" rel="stylesheet" type="text/css">
 		<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet" type="text/css">
-		<link rel="stylesheet" href="../static/css/font-awesome.css">
-		<link rel="stylesheet" href="../static/css/foundation.css">
-		<link rel="stylesheet" href="../static/css/style.css">
+        <link rel="stylesheet" href="{% static "css/font-awesome.css" %}">
+        <link rel="stylesheet" href="{% static "css/foundation.css" %}">
+        <link rel="stylesheet" href="{% static "css/style.css" %}">
 	</head>
 	<body>
 		<div id="header">
@@ -62,7 +63,7 @@
 							<div class="row">
 								<div class="small-3 large-5 columns">
 									<div class="album-cover">
-										<img src="css/imgs/320x320.png" />
+										<img src="{% static "imgs/320x320.png" %}" />
 										<i class="fa fa-play-circle-o" aria-hidden="true"></i>
 									</div><!-- end album-cover -->
 								</div>
@@ -98,7 +99,7 @@
 							<div class="row">
 								<div class="small-3 large-5 columns">
 									<div class="album-cover">
-										<img src="css/imgs/320x320.png" />
+										<img src="{% static "imgs/320x320.png" %}" />
 										<i class="fa fa-play-circle-o" aria-hidden="true"></i>
 									</div><!-- end album-cover -->
 								</div>
@@ -128,10 +129,10 @@
 				</div>
 			</div>
 		</div><!-- end footer -->
-		<script src="http://www.theresamonaco.com/playlists/js/vendor/jquery.js"></script>
-		<script src="http://www.theresamonaco.com/playlists/js/vendor/jquery-sortable.js"></script>
-		<script src="http://www.theresamonaco.com/playlists/js/vendor/what-input.js"></script>
-		<script src="http://www.theresamonaco.com/playlists/js/vendor/foundation.min.js"></script>
+		<script src="{% static "js/vendor/jquery.js" %}"></script>
+		<script src="{% static "js/vendor/jquery-sortable.js" %}"></script>
+		<script src="{% static "js/vendor/what-input.js" %}"></script>
+		<script src="{% static "js/vendor/foundation.min.js" %}"></script>
 		
 		<script type="text/javascript">
 		  var adjustment;

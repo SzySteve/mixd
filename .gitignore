@@ -2,3 +2,5 @@
 db.sqlite3
 .cache-*
 *.pyc
+playlist/static/.DS_Store
+playlist/static/js/vendor/*
