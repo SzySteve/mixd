@@ -1,105 +1,49 @@
-{% load staticfiles %}
-<!doctype html>
-<html class="no-js" lang="en" dir="ltr">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="x-ua-compatible" content="ie=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Spotify Playlists</title>
-		<link href="https://fonts.googleapis.com/css?family=Arvo:400,700" rel="stylesheet" type="text/css">
-		<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="{% static "css/font-awesome.css" %}">
-        <link rel="stylesheet" href="{% static "css/foundation.css" %}">
-        <link rel="stylesheet" href="{% static "css/style.css" %}">
-	</head>
-	<body>
-		<div id="header">
-			<div id="header-top">
-				<div class="row">
-					<div class="small-12 medium-4 columns">
-						<h3 id="logo"><a href="/">Spotify Playlists</a></h3>
-					</div>
-					<div class="hide-for-small-only medium-8 columns">
-					</div>
-				</div><!-- end row -->
-			</div><!-- end header-top -->
-			<div id="header-bottom">
-				<div class="row">
-					<div class="small-12 large-6 columns">
-						<form id="search">
-							<div id="search-field">
-								<input type="search" placeholder="search playlists" />
-								<input type="submit" id="search-submit" value="Search" />
-							</div>
-						</form>
-					</div>
-					<div class="small-12 large-6 columns">
-						<div id="add-wrapper">
-							<span class="or">or</span>
-							<button id="add-playlist" class="button">Add a Playlist</button>						
-						</div>
-					</div>
-				</div><!-- end row -->
-			</div><!-- end header-bottom -->
-		</div><!-- end header -->	
-		<div id="wrapper">
-			<section id="playlists">
-				<div class="row">
-					<div class="small-12 columns">
-						<h4>Top Playlists</h4>
-					</div>
-				</div><!-- end row -->
-				<div id="index" class="row small-up-1 large-up-2">
-                    {% for playlist in playlists %}
-                        <div class="column">
-                            <div class="playlist">
-                                <div class="row">
-                                    <div class="small-12 columns">
-                                        <div class="playlist-byline">
-                                            <div class="user-avatar"></div>
-                                            <div class="playlist-posted">Created by <span class="author">{{ playlist.owner.display_name }}</span></div>
-                                        </div>
+{% extends "base.html" %}
+
+{% block content %}
+    <div id="wrapper">
+        <section id="playlists">
+            <div class="row">
+                <div class="small-12 columns">
+                    <h4>Top Playlists</h4>
+                </div>
+            </div><!-- end row -->
+            <div id="index" class="row small-up-1 large-up-2">
+                {% for playlist in playlists %}
+                    <div class="column">
+                        <div class="playlist">
+                            <div class="row">
+                                <div class="small-12 columns">
+                                    <div class="playlist-byline">
+                                        <div class="user-avatar"></div>
+                                        <div class="playlist-posted">Created by <span class="author">{{ playlist.owner.display_name }}</span></div>
                                     </div>
-                                </div><!-- end row -->
-                                <div class="row">
-                                    <div class="small-3 large-5 columns">
-                                        <div class="album-cover">
-                                            <img src="{{ playlist.images.0.url }}" />
-                                            <i class="fa fa-play-circle-o" aria-hidden="true"></i>
-                                        </div><!-- end album-cover -->
+                                </div>
+                            </div><!-- end row -->
+                            <div class="row">
+                                <div class="small-3 large-5 columns">
+                                    <div class="album-cover">
+                                        <img src="{{ playlist.images.0.url }}" />
+                                        <i class="fa fa-play-circle-o" aria-hidden="true"></i>
+                                    </div><!-- end album-cover -->
+                                </div>
+                                <div class="small-9 large-7 columns">
+                                    <h3><a href="playlist_detail?id={{ playlist.mixd_id }}">{{ playlist.name }}</a></h3>
+                                    <div class="playlist-stats">
+                                        <span class="playlist-tracks"><i class="fa fa-list" aria-hidden="true"></i>{{ playlist.tracks.total }}</span>
+                                        <span class="num-follows"><i class="fa fa-plus" aria-hidden="true"></i>{{ playlist.followers.total }}</span>
                                     </div>
-                                    <div class="small-9 large-7 columns">
-                                        <h3><a href="playlist_detail?id={{ playlist.mixd_id }}">{{ playlist.name }}</a></h3>
-                                        <div class="playlist-stats">
-                                            <span class="playlist-tracks"><i class="fa fa-list" aria-hidden="true"></i>{{ playlist.tracks.total }}</span>
-                                            <span class="num-follows"><i class="fa fa-plus" aria-hidden="true"></i>{{ playlist.followers.total }}</span>
-                                        </div>
-                                        <ul class="tags">
-                                            <li><a href="">Example Tag</a></li>
-                                        </ul>
-                                        <div class=""></div>
-                                    </div>
-                                </div><!-- end row -->
-                            </div><!-- end playlist -->
-                        </div><!-- end column -->
-                    {% endfor %}
-				</div><!-- end row -->
-			</section>
-		</div><!-- end wrapper -->
-		<div id="footer">
-			<div class="row">
-				<div class="small-12 columns">
-					<p>Spotify Playlists © 2016. All Rights Reserved.</p>
-				</div>
-			</div>
-		</div><!-- end footer -->
-		<script src="{% static "js/vendor/jquery.js" %}"></script>
-		<script src="{% static "js/vendor/what-input.js" %}"></script>
-		<script src="{% static "js/vendor/foundation.min.js" %}"></script>
-		<script>
-		   $(document).ready(function() {
-		      $(document).foundation();
-		   })
-		</script>
-	</body>
-</html>
+                                    <ul class="tags">
+                                        <li><a href="">Example Tag</a></li>
+                                    </ul>
+                                    <div class=""></div>
+                                </div>
+                            </div><!-- end row -->
+                        </div><!-- end playlist -->
+                    </div><!-- end column -->
+                {% endfor %}
+            </div><!-- end row -->
+        </section>
+    </div><!-- end wrapper -->
+{% endblock %}
+
