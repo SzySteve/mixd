@@ -14,3 +14,5 @@ mixd is a Spotify playlist sharing service.
 - [ ] Make tagging page submit a form
 - [ ] Seed a bunch of tags, and populate the tag page with those
 - [ ] Adjust suggest tags to provide betterer results
+- [ ] Rename views/templates ot make some more sense
+- [ ] Optimize API calls to spotify

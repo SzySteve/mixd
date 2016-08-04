@@ -2,7 +2,7 @@ from django.http.response import HttpResponse
 from django.shortcuts import render
 import json
 
-from models import Playlist, Tag, TAG_CATEGORY_MOOD
+from models import Playlist, Tag, TagInstance, TAG_CATEGORY_MOOD, TAG_CATEGORY_GENRE
 from spotipy_client import sp, steve_spotify_id, playlist_id
 from suggest_tags import suggest_tags
 
@@ -64,9 +64,28 @@ def share(request):
     # messy as shit i dont like this
     all_tags = Tag.objects.all()
     tags = {
-        'mood': all_tags.filter(category=TAG_CATEGORY_MOOD)
+        'mood': all_tags.filter(category=TAG_CATEGORY_MOOD),
+        'genre': all_tags.filter(category=TAG_CATEGORY_GENRE)
     }
 
     return render(request, 'tag-and-share.html', {'playlist': playlist,
                                                   'suggested_tags': suggested_tags,
                                                   'tags': tags})
+
+def save(request):
+    playlist = request.POST['playlist']
+    user_tags = request.POST['tags']
+    description = request.POST['description']
+
+    mixd_playlist = Playlist.objects.create(id=playlist['id'], user_id=playlist['owner']['id'], name=playlist['name'],
+                                            description=description)
+
+    # Ensure each tag exists in the DB already
+    for category in user_tags.keys():
+        tags = user_tags[category]
+        for proposed_tag in tags:
+            tag = Tag.objects.get_or_create(category=category, name=proposed_tag.name)
+            tag_instance = TagInstance.create(tag=tag, playlist=mixd_playlist)
+
+
+
