@@ -17,39 +17,42 @@
 	</head>
 	<body>
 		<div id="header">
-			<div id="header-top">
+            <div id="header-top">
 				<div class="row">
-					<div class="small-12 medium-4 columns">
-						<h3 id="logo"><a href="/">Spotify Playlists</a></h3>
+					<div class="small-12 medium-2 columns">
+						<h3 id="logo"><a href="/index"><img src="{% static "imgs/logo.png" %}"></a></h3>
 					</div>
-					<div class="hide-for-small-only medium-8 columns">
+					<div class="hide-for-small-only medium-10 columns">
+						<p>Find and Share Spotify Playlists</p>
 					</div>
 				</div><!-- end row -->
-			</div><!-- end header-top -->
+			</div>
 			<div id="header-bottom">
 				<div class="row">
 					<div class="small-12 large-6 columns">
 						<form id="search">
 							<div id="search-field">
-								<input type="search" placeholder="search playlists" />
-								<input type="submit" id="search-submit" value="Search" />
+								<input type="search" placeholder="search playlists">
+								<a href="search.php" id="search-submit" class="button"><i class="fa fa-search" aria-hidden="true"></i>
+                                </a>
 							</div>
 						</form>
 					</div>
 					<div class="small-12 large-6 columns">
 						<div id="add-wrapper">
 							<span class="or">or</span>
-							<button id="add-playlist" class="button">Add a Playlist</button>
+							<a id="add-playlist" href="add.php" class="button">Add a Playlist &nbsp;<i class="fa fa-plus" aria-hidden="true"></i>
+                            </a>
 						</div>
 					</div>
 				</div><!-- end row -->
-			</div><!-- end header-bottom -->
+			</div>
 		</div><!-- end header -->
 		{% block content %}{% endblock content %}
 		<div id="footer">
 			<div class="row">
 				<div class="small-12 columns">
-					<p>Spotify Playlists © 2016. All Rights Reserved.</p>
+					<p>Mixd © 2016. All Rights Reserved.</p>
 				</div>
 			</div>
 		</div><!-- end footer -->
