@@ -7,19 +7,6 @@ from spotipy_client import sp, steve_spotify_id, playlist_id
 from suggest_tags import suggest_tags
 
 
-
-def seed(request):
-    playlists = sp.user_playlists(steve_spotify_id, limit=10)['items']
-    for p in playlists:
-        print p
-        Playlist.objects.create(id=p['id'], user_id=steve_spotify_id, name=p['name'])
-    return HttpResponse("seeded with steves playlists")
-
-def tags(request):
-    tracks = sp.user_playlist_tracks(steve_spotify_id, playlist_id)['items']
-    tags = suggest_tags(tracks)
-    return HttpResponse(json.dumps(tags))
-
 def seedTags(request):
     Tag.objects.create(name="Party", category=TAG_CATEGORY_MOOD)
     Tag.objects.create(name="Upbeat", category=TAG_CATEGORY_MOOD)
@@ -35,6 +22,7 @@ def index(request):
 
     for playlist in playlists:
         playlist['owner'] = sp.user(playlist['owner']['id'])
+        playlist['tags'] = TagInstance.objects.filter(playlist_id=playlist['id'])
 
     return render(request, 'index.html', {'playlists': playlists})
 

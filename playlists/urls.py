@@ -26,7 +26,6 @@ urlpatterns = [
     url(r'^save', playlist_views.save),
     url(r'^share', playlist_views.share),
     # Development only junk, get rid of these when the app is fully functional.
-    url(r'^playlistseed$', playlist_views.seed),
     url(r'^playlistseedtags$', playlist_views.seedTags),
 
 ]

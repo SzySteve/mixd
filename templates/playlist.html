@@ -19,18 +19,15 @@
                         <span class="num-follows"><i class="fa fa-plus" aria-hidden="true"></i>{{ playlist.followers.total }}</span>
                     </div>
                     <p>{{ description }}</p>
-                    <button class="button" id="play-now">Play Now</button>
-                    <button class="button" id="follow-playlist">Follow on Spotify</button>
+                    <ul class="tags sortable">
+                        {% for tag in tags %}
+                            <li class="{{ tag.tag.category }}">{{ tag.tag.name }}</li>
+                        {% endfor %}
+                    </ul>
+                    <button class="button" id="play-now">Play Now &nbsp;<i class="fa fa-play" aria-hidden="true"></i></button>
+                    <button class="button" id="follow-playlist">Follow on Spotify &nbsp;<i class="fa fa-spotify" aria-hidden="true"></i></button>
                 </div><!-- end small-12 -->
             </div><!-- end row -->
-            <div id="tag-wrapper" class="row">
-                <h2>Tags:</h2>
-                <ul class="tags">
-                    {% for tag in tags %}
-                        <li class="{{ tag.tag.category }}"><a href="">{{ tag.tag.name }}</a></li>
-                    {% endfor %}
-                </ul>
-            </div>
             <div id="playlist-wrapper" class="row">
                 <div class="small-12 columns">
                     <h4>Your Playlist</h4>

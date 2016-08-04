@@ -15,4 +15,3 @@ mixd is a Spotify playlist sharing service.
 - [ ] Adjust suggest tags to provide betterer results
 - [ ] Rename views/templates ot make some more sense
 - [ ] Optimize API calls to spotify
-- [ ] Better url routing/success page for submissions.
