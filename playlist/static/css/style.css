@@ -1,3 +1,7 @@
+/* @override 
+	http://www.theresamonaco.com/playlists/css/style.css
+	http://theresamonaco.com/playlists/css/style.css
+*/
 
 body {
 	color: #fff;
@@ -58,13 +62,19 @@ a:hover {
 
 #header-top {
 	background: #192226;
-	padding: 1rem 0;
+	padding: 0.5rem 0;
 }
 
 #header-bottom {
 	color: #fff;
 	background: #2c3840;
 	padding: 1rem 0;
+}
+
+#header-top p {
+	margin-top: 1.35rem;
+	font-family: 'Arvo', serif;
+	font-weight: 600;
 }
 
 #logo {
@@ -75,6 +85,10 @@ a:hover {
 #logo a {
 	color: #fff;
 	text-decoration: none;
+}
+
+#logo img {
+	max-width: 120px;
 }
 
 #utility-nav {
@@ -106,27 +120,27 @@ a:hover {
 
 #search-submit {
 	color: #fff;
-	background: #555;
-	height: 42px;
 	position: absolute;
 	top: 0;
 	right: 0;
 	margin-left: 1rem;
-	padding: 0 1.25rem;
 	outline: 0;
-	line-height: 2.5;
+	font-weight: 600;
 	text-decoration: none;
 }
 
 #add-playlist {
 	color: #fff;
 	display: inline-block;
-	background: #888;
+	background: #ee445f;
 	margin-left: 2.75rem;
-	padding: 0 1.25rem;
-	height: 42px;
+	margin-bottom: 0;
 	text-decoration: none;
-	line-height: 2.65;
+	font-weight: 600;
+}
+
+#add-playlist:hover {
+	background: #cc3952;
 }
 
 span.or {
@@ -153,6 +167,13 @@ section {
 
 button, .button, .button:visited {
 	color: #fff;
+	background: #44b4ee;
+	margin-bottom: 0;
+	font-weight: 700;
+}
+
+button:hover, .button:hover {
+	background: #399bce;
 }
 
 input {
@@ -186,7 +207,7 @@ input:focus {
 	width: 100%;
 }
 
-#add-playlist-uri input[type="submit"] {
+#add-playlist-uri #submit-playlist {
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -205,7 +226,7 @@ input:focus {
 	color: #fff;
 	background: #192226;
 	width: 100%;
-	height: 42px;
+	height: 40px;
 	font-size: 0.85rem;
 	padding: 0.5rem;
 	border: 0;
@@ -231,6 +252,10 @@ input[type="text"]:-ms-input-placeholder {
 	color: #333739;
 }
 
+#follow-playlist {
+	background: #1bad4f;
+}
+
 /* @end */
 
 /* @group playlists */
@@ -250,7 +275,6 @@ input[type="text"]:-ms-input-placeholder {
 .playlist {
 	background: #fff;
 	padding: 0.75rem;
-	height: 266px;
 }
 
 .playlist .large-7 {
@@ -303,18 +327,21 @@ ul.tags li {
 
 ul.tags li a {
 	color: #fff;
+	display: inline-block;
 	background: #aaa;
 	padding: 0.25rem 0.5rem;
 	font-size: 0.75rem;
 }
 
 .playlist ul.tags li a {
-	background: #8aa2a9;
+	color: #888;
+	background: transparent;
+	border: 1px solid #ccc;
 	text-transform: lowercase;
 }
 
 .playlist ul.tags li a:hover {
-	background: #8aa2a9;
+	pointer-events: none;
 }
 
 .playlist-byline {
@@ -421,20 +448,43 @@ li.track > div {
 
 /* @group add playlist / view playlist */
 
+#add-playlist-uri h4 {
+	margin-top: 1rem;
+}
+
+#add-playlist-uri ol li {
+	margin-bottom: 0.5rem;
+}
+
 .accordion .accordion-title, .accordion .accordion-content {
 	padding: 1rem 0.75rem;
 	background-repeat: no-repeat;
+}
+
+.accordion .accordion-title {
+	color: #333739;
+	font-size: 0.85rem;
+}
+
+.accordion .accordion-title:hover {
+	color: #ee445f;
+	background: transparent;
 }
 
 #playlist-info {
 	margin-bottom: 2.5rem;
 }
 
+#playlist-info ul.tags {
+	margin-bottom: 0.75rem;
+}
+
 #playlist-description {
 	border: 0;
 	width: 100%;
 	min-height: 120px;
-	max-width: 500px;
+	max-width: 640px;
+	margin-top: 0.75rem;
 	padding: 0.75rem;
 	font-size: 0.85rem;
 }
@@ -459,8 +509,13 @@ li.track > div {
 	padding-bottom: 0.9rem;
 }
 
+#drag-and-drop p {
+	margin-bottom: 0;
+	padding: 0.5rem 0.75rem 0;
+}
+
 body.dragging, body.dragging * {
-	cursor: move !important;
+	cursor: -webkit-grabbing !important;
 }
 
 .dragged {
@@ -480,9 +535,14 @@ ul.sortable li {
 	display: inline-block;
 	position: relative;
 	color: #fff;
-	background: #8aa2a9;
+	background: #009688;
 	padding: 0.25rem 0.5rem;
 	font-size: 0.75rem;
+	border-bottom: 2px solid #00786c;
+}
+
+ul.sortable li:hover {
+	cursor: -webkit-grab;
 }
 
 ul.sortable li:before {
@@ -502,19 +562,21 @@ ul.sortable li:before {
 }
 
 ul.tags li.genre {
-	border-bottom: 2px solid #627d85;
 }
 
 ul.sortable li.mood {
-	background: darkblue;
+	background: #00bcd4;
+	border-color: #008fa1;
 }
 
 ul.sortable li.setting {
-	background: darkcyan;
+	background: #3f51b5;
+	border-color: #32408f;
 }
 
 ul.sortable li.other {
-	background: #dfb968;
+	background: #673ab7;
+	border-color: #512e90;
 }
 
 #complete-playlist {
@@ -542,7 +604,7 @@ ul.sortable li.other {
 /* @group media queries */
 
 @media screen and (max-width: 1023px) {
-	#add-playlist-wrapper {margin-top: 1rem;}
+	#add-wrapper {margin-top: 1rem;}
 	.playlist {height: auto;}
 }
 

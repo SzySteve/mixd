@@ -92,15 +92,9 @@ def save(request):
         tags = user_tags[category]
         for proposed_tag in tags:
             tag = Tag.objects.get_or_create(category=category, name=proposed_tag)[0]
-            tag_instance = TagInstance.objects.create(tag=tag, playlist=mixd_playlist)
+            TagInstance.objects.create(tag=tag, playlist=mixd_playlist)
 
-    tags = TagInstance.objects.filter(playlist=mixd_playlist)
-
-    playlist = sp.user_playlist(user=steve_spotify_id, playlist_id=mixd_playlist.id)
-
-    return render(request, 'playlist.html', {'playlist': playlist,
-                                             'description': mixd_playlist.description,
-                                             'tags': tags})
+    return render(request, 'success.html', {'playlist_id': playlist_id})
 
 
 
