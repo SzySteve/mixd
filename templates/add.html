@@ -12,8 +12,8 @@
                     <div id="add-playlist-uri">
                         <form action="share" method="post">
                             {% csrf_token %}
-                            <input type="text" name="uri" placeholder="Paste in your Spotify URI" />
-                            <input type="submit" class="button" value="Add Playlist"/>
+                            <input type="text" oninput="handleURIInput(this)" name="uri" placeholder="Paste in your Spotify URI" />
+                            <input type="submit" class="button" value="Add Playlist" id="uriSubmit"/>
                         </form>
                         <div class="row">
                             <div class="small-12 medium-6 columns">
@@ -33,4 +33,20 @@
             </div><!-- end row -->
         </section>
     </div><!-- end wrapper -->
+    <script type="text/javascript">
+
+    var submitButton = document.getElementById('uriSubmit');
+    submitButton.disabled = true;
+
+    var validURI = /^spotify:user:\w+:playlist:\w+$/;
+
+    function handleURIInput(input) {
+        if (validURI.exec(input.value)) {
+            submitButton.disabled = false;
+        } else {
+            submitButton.disabled = true;
+        }
+    }
+
+    </script>
 {% endblock %}
