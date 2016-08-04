@@ -9,7 +9,7 @@ TAG_CATEGORY_PLACE = "place"
 # Create your models here.
 class Playlist(models.Model):
 
-    spotify_id = models.CharField(max_length=30, unique=True)
+    id = models.CharField(max_length=30, primary_key=True)
     description = models.TextField(max_length=600, default="Description, yo")
     likes = models.IntegerField(default=0)
     follows = models.IntegerField(default=0)
