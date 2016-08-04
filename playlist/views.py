@@ -6,10 +6,6 @@ from spotipy_client import sp, steve_spotify_id, playlist_id
 from suggest_tags import suggest_tags
 import json
 
-# Create your views here.
-# def index(request):
-#     playlists = Playlist.objects.all()
-#     return HttpResponse(str([p.spotify_id for p in playlists]))
 
 def seed(request):
     playlists = sp.user_playlists(steve_spotify_id, limit=10)['items']
@@ -34,15 +30,15 @@ def seedTags(request):
 def index(request):
     raw_playlists = Playlist.objects.all()
     ids = [p.id for p in raw_playlists]
-    playlists = [sp.user_playlist(user=steve_spotify_id, playlist_id=pid) for pid in pids]
+    playlists = [sp.user_playlist(user=steve_spotify_id, playlist_id=id) for id in ids]
 
     return render(request, 'index.html', {'playlists': playlists})
 
 def detail(request):
-    mixd_id = request.GET['id']
-    mixd_playlist = Playlist.objects.get(id=mixd_id)
+    id = request.GET['id']
+    mixd_playlist = Playlist.objects.get(id=id)
 
-    playlist = sp.user_playlist(user=steve_spotify_id, playlist_id=mixd_playlist.spotify_id)
+    playlist = sp.user_playlist(user=steve_spotify_id, playlist_id=mixd_playlist.id)
     return render(request, 'playlist.html', {'playlist': playlist,
                                              'description': mixd_playlist.description})
 def add(request):
