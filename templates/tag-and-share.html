@@ -51,11 +51,9 @@
                             <a href="#collapse2" role="tab" class="accordion-title" id="collapse2-heading">Mood</a>
                             <div id="collapse2" class="accordion-content" role="tabpanel" data-tab-content aria-labelledby="panel1d-heading">
                                 <ul class="tags sortable">
-                                    <li class="mood">Chill</li>
-                                    <li class="mood">Angry</li>
-                                    <li class="mood">Happy</li>
-                                    <li class="mood">Sad</li>
-                                    <li class="mood">Lost</li>
+                                    {% for tag in tags.mood %}
+                                        <li>{{ tag.name }}</li>
+                                    {% endfor %}
                                 </ul>
                             </div>
                         </li>
@@ -85,10 +83,10 @@
                 <div class="small-12 medium-6 columns">
                     <h5>Drag Tags Here</h5>
                     <ul id="tag-drop-field" class="sortable">
-                        {% for tag in tags.genre %}
+                        {% for tag in suggested_tags.genre %}
                             <li>{{ tag.name }}</li>
                         {% endfor %}
-                        {% for tag in tags.mood %}
+                        {% for tag in suggested_tags.mood %}
                             <li>{{ tag.name }}</li>
                         {% endfor %}
                     </ul>
