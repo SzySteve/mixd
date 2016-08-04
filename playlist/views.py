@@ -84,6 +84,5 @@ def save(request):
 
     return render(request, 'success.html', {'playlist_id': playlist_id})
 
-
-
-
+def search(request):
+    return render(request, 'search.html', {})
