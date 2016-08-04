@@ -22,6 +22,10 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', playlist_views.index),
     url(r'^playlist_detail', playlist_views.detail),
+    url(r'^add', playlist_views.add),
+    url(r'^share', playlist_views.share),
+    # Development only junk, get rid of these when the app is fully functional.
     url(r'^playlistseed', playlist_views.seed),
     url(r'^playlisttags', playlist_views.tags),
+
 ]

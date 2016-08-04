@@ -15,7 +15,7 @@ def seed(request):
     playlists = sp.user_playlists(steve_spotify_id, limit=10)['items']
     for p in playlists:
         print p
-        Playlist.objects.create(spotify_id=p['id'], user_id=steve_spotify_id, name=p['name'])
+        Playlist.objects.create(id=p['id'], user_id=steve_spotify_id, name=p['name'])
     return HttpResponse("seeded with steves playlists")
 
 def tags(request):
@@ -33,12 +33,8 @@ def seedTags(request):
 
 def index(request):
     raw_playlists = Playlist.objects.all()
-    pids = [p.spotify_id for p in raw_playlists]
     ids = [p.id for p in raw_playlists]
     playlists = [sp.user_playlist(user=steve_spotify_id, playlist_id=pid) for pid in pids]
-
-    for playlist, id in zip(playlists, ids):
-        playlist['mixd_id'] = id
 
     return render(request, 'index.html', {'playlists': playlists})
 
@@ -49,3 +45,15 @@ def detail(request):
     playlist = sp.user_playlist(user=steve_spotify_id, playlist_id=mixd_playlist.spotify_id)
     return render(request, 'playlist.html', {'playlist': playlist,
                                              'description': mixd_playlist.description})
+def add(request):
+    return render(request, 'add.html', {})
+
+def share(request):
+    uri = request.POST['uri']
+    # Should be enforced on the frontend first before submission and gracefully handled here.
+    # spotify:user:1210159879:playlist:0v5PyzDU1jZIN7zgvpFfFb
+    tokens = uri.split(':')
+    user = tokens[2]
+    pid = tokens[4]
+    playlist = sp.user_playlist(user=user, playlist_id=pid)
+    return render(request, 'tag-and-share.html', {'playlist': playlist})

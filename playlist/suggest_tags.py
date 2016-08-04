@@ -1,11 +1,5 @@
-import sys
-import spotipy
-import spotipy.util as util
-from collections import Counter
-from collections import defaultdict
-from random import sample
-import math
-from spotipy_client import sp, steve_spotify_id
+from collections import Counter, defaultdict
+from spotipy_client import sp
 from models import Tag, TAG_CATEGORY_GENRE, TAG_CATEGORY_MOOD
 
 
