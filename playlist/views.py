@@ -43,8 +43,12 @@ def detail(request):
     mixd_playlist = Playlist.objects.get(id=id)
 
     playlist = sp.user_playlist(user=steve_spotify_id, playlist_id=mixd_playlist.id)
+
+    tags = TagInstance.objects.filter(playlist=mixd_playlist)
+
     return render(request, 'playlist.html', {'playlist': playlist,
-                                             'description': mixd_playlist.description})
+                                             'description': mixd_playlist.description,
+                                             'tags': tags})
 def add(request):
     return render(request, 'add.html', {})
 
@@ -86,6 +90,9 @@ def save(request):
         for proposed_tag in tags:
             tag = Tag.objects.get_or_create(category=category, name=proposed_tag.name)
             tag_instance = TagInstance.create(tag=tag, playlist=mixd_playlist)
+
+    # This allowed? Well see!
+    return detail(request)
 
 
 
