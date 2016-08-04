@@ -12,7 +12,7 @@
                     <img src="{{ playlist.images.0.url }}" />
                 </div>
                 <div class="small-12 medium-9 columns">
-                    <h2> {{ playlist.name }}</h2>
+                    <h2>{{ playlist.name }}</h2>
                     <div class="playlist-stats">
                         <span class="playlist-length"><i class="fa fa-clock-o" aria-hidden="true"></i>0:50</span>
                         <span class="playlist-tracks"><i class="fa fa-list" aria-hidden="true"></i>{{ playlist.tracks.total }}</span>
@@ -51,11 +51,9 @@
                             <a href="#collapse2" role="tab" class="accordion-title" id="collapse2-heading">Mood</a>
                             <div id="collapse2" class="accordion-content" role="tabpanel" data-tab-content aria-labelledby="panel1d-heading">
                                 <ul class="tags sortable">
-                                    <li class="mood">Chill</li>
-                                    <li class="mood">Angry</li>
-                                    <li class="mood">Happy</li>
-                                    <li class="mood">Sad</li>
-                                    <li class="mood">Lost</li>
+                                    {% for tag in tags.mood %}
+                                        <li class="mood">{{ tag.name }}</li>
+                                    {% endfor %}
                                 </ul>
                             </div>
                         </li>
@@ -84,7 +82,14 @@
                 </div><!-- end medium-6 -->
                 <div class="small-12 medium-6 columns">
                     <h5>Drag Tags Here</h5>
-                    <ul id="tag-drop-field" class="sortable"></ul>
+                    <ul id="tag-drop-field" class="sortable">
+                        {% for tag in suggested_tags.genre %}
+                            <li class="genre">{{ tag.name }}</li>
+                        {% endfor %}
+                        {% for tag in suggested_tags.mood %}
+                            <li class="mood">{{ tag.name }}</li>
+                        {% endfor %}
+                    </ul>
                 </div>
             </div><!-- end row -->
             <div class="row">
@@ -114,6 +119,9 @@
                 </div><!-- end your playlist -->
             </div><!-- end row -->
         </section>
+        <form method="post" action="/save" id="saveForm">
+            {% csrf_token %}
+        </form>
     </div><!-- end wrapper -->
 
     <script src="http://www.theresamonaco.com/playlists/js/vendor/jquery-sortable.js"></script>
@@ -150,5 +158,51 @@
         });
       }
       });
+
+    function postPlaylist() {
+        var form = document.getElementById("saveForm");
+
+        var tag_elems = document.querySelectorAll('#tag-drop-field li');
+        var tags = {
+            'mood': [],
+            'genre': [],
+            'setting': [],
+            'other': []
+        };
+
+        for (var item of tag_elems) {
+            var category = item.className;
+            var name = item.innerHTML;
+            tags[category].push(name)
+        }
+
+        var description = document.getElementById('playlist-description').value;
+        var user_id = '{{ playlist.owner.id }}';
+        var playlist_id = '{{ playlist.id }}';
+        var name = '{{ playlist.name }}';
+
+        params = {
+            tags: JSON.stringify(tags),
+            description: description,
+            user_id: user_id,
+            playlist_id: playlist_id,
+            name: name
+        }
+
+        for(var key in params) {
+            if(params.hasOwnProperty(key)) {
+                var hiddenField = document.createElement("input");
+                hiddenField.setAttribute("type", "hidden");
+                hiddenField.setAttribute("name", key);
+                hiddenField.setAttribute("value", params[key]);
+
+                form.appendChild(hiddenField);
+             }
+        }
+
+        document.body.appendChild(form);
+        form.submit();
+    }
+
     </script>
 {% endblock %}

@@ -23,9 +23,10 @@ urlpatterns = [
     url(r'^$', playlist_views.index),
     url(r'^playlist_detail', playlist_views.detail),
     url(r'^add', playlist_views.add),
+    url(r'^save', playlist_views.save),
     url(r'^share', playlist_views.share),
     # Development only junk, get rid of these when the app is fully functional.
-    url(r'^playlistseed', playlist_views.seed),
-    url(r'^playlisttags', playlist_views.tags),
+    url(r'^playlistseed$', playlist_views.seed),
+    url(r'^playlistseedtags$', playlist_views.seedTags),
 
 ]

@@ -23,6 +23,14 @@
                     <button class="button" id="follow-playlist">Follow on Spotify</button>
                 </div><!-- end small-12 -->
             </div><!-- end row -->
+            <div id="tag-wrapper" class="row">
+                <h2>Tags:</h2>
+                <ul class="tags">
+                    {% for tag in tags %}
+                        <li class="{{ tag.tag.category }}"><a href="">{{ tag.tag.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
             <div id="playlist-wrapper" class="row">
                 <div class="small-12 columns">
                     <h4>Your Playlist</h4>
