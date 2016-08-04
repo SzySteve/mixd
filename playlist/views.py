@@ -77,22 +77,31 @@ def share(request):
                                                   'tags': tags})
 
 def save(request):
-    playlist = request.POST['playlist']
-    user_tags = request.POST['tags']
+    #Wrap this all in a transaction
+    playlist_id = request.POST['playlist_id']
+    user_id = request.POST['user_id']
+    name = request.POST['name']
+    user_tags = json.loads(request.POST['tags'])
     description = request.POST['description']
 
-    mixd_playlist = Playlist.objects.create(id=playlist['id'], user_id=playlist['owner']['id'], name=playlist['name'],
-                                            description=description)
+    mixd_playlist = Playlist.objects.create(id=playlist_id, user_id=user_id,
+                                            description=description, name=name)
 
     # Ensure each tag exists in the DB already
     for category in user_tags.keys():
         tags = user_tags[category]
         for proposed_tag in tags:
-            tag = Tag.objects.get_or_create(category=category, name=proposed_tag.name)
-            tag_instance = TagInstance.create(tag=tag, playlist=mixd_playlist)
+            tag = Tag.objects.get_or_create(category=category, name=proposed_tag)[0]
+            tag_instance = TagInstance.objects.create(tag=tag, playlist=mixd_playlist)
 
-    # This allowed? Well see!
-    return detail(request)
+    tags = TagInstance.objects.filter(playlist=mixd_playlist)
+
+    playlist = sp.user_playlist(user=steve_spotify_id, playlist_id=mixd_playlist.id)
+
+    return render(request, 'playlist.html', {'playlist': playlist,
+                                             'description': mixd_playlist.description,
+                                             'tags': tags})
+
 
 
 

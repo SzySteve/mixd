@@ -52,7 +52,7 @@
                             <div id="collapse2" class="accordion-content" role="tabpanel" data-tab-content aria-labelledby="panel1d-heading">
                                 <ul class="tags sortable">
                                     {% for tag in tags.mood %}
-                                        <li>{{ tag.name }}</li>
+                                        <li class="mood">{{ tag.name }}</li>
                                     {% endfor %}
                                 </ul>
                             </div>
@@ -84,10 +84,10 @@
                     <h5>Drag Tags Here</h5>
                     <ul id="tag-drop-field" class="sortable">
                         {% for tag in suggested_tags.genre %}
-                            <li>{{ tag.name }}</li>
+                            <li class="genre">{{ tag.name }}</li>
                         {% endfor %}
                         {% for tag in suggested_tags.mood %}
-                            <li>{{ tag.name }}</li>
+                            <li class="mood">{{ tag.name }}</li>
                         {% endfor %}
                     </ul>
                 </div>
@@ -119,6 +119,9 @@
                 </div><!-- end your playlist -->
             </div><!-- end row -->
         </section>
+        <form method="post" action="/save" id="saveForm">
+            {% csrf_token %}
+        </form>
     </div><!-- end wrapper -->
 
     <script src="http://www.theresamonaco.com/playlists/js/vendor/jquery-sortable.js"></script>
@@ -155,5 +158,51 @@
         });
       }
       });
+
+    function postPlaylist() {
+        var form = document.getElementById("saveForm");
+
+        var tag_elems = document.querySelectorAll('#tag-drop-field li');
+        var tags = {
+            'mood': [],
+            'genre': [],
+            'setting': [],
+            'other': []
+        };
+
+        for (var item of tag_elems) {
+            var category = item.className;
+            var name = item.innerHTML;
+            tags[category].push(name)
+        }
+
+        var description = document.getElementById('playlist-description').value;
+        var user_id = '{{ playlist.owner.id }}';
+        var playlist_id = '{{ playlist.id }}';
+        var name = '{{ playlist.name }}';
+
+        params = {
+            tags: JSON.stringify(tags),
+            description: description,
+            user_id: user_id,
+            playlist_id: playlist_id,
+            name: name
+        }
+
+        for(var key in params) {
+            if(params.hasOwnProperty(key)) {
+                var hiddenField = document.createElement("input");
+                hiddenField.setAttribute("type", "hidden");
+                hiddenField.setAttribute("name", key);
+                hiddenField.setAttribute("value", params[key]);
+
+                form.appendChild(hiddenField);
+             }
+        }
+
+        document.body.appendChild(form);
+        form.submit();
+    }
+
     </script>
 {% endblock %}
