@@ -1,10 +1,11 @@
-from django.shortcuts import render
-# from django.template import loader
 from django.http.response import HttpResponse
+from django.shortcuts import render
+import json
+
 from models import Playlist, Tag, TAG_CATEGORY_MOOD
 from spotipy_client import sp, steve_spotify_id, playlist_id
 from suggest_tags import suggest_tags
-import json
+
 
 
 def seed(request):
@@ -46,10 +47,15 @@ def add(request):
 
 def share(request):
     uri = request.POST['uri']
-    # Should be enforced on the frontend first before submission and gracefully handled here.
+    # ToDo: Gracefully handle errors
     # spotify:user:1210159879:playlist:0v5PyzDU1jZIN7zgvpFfFb
     tokens = uri.split(':')
     user = tokens[2]
     pid = tokens[4]
+
     playlist = sp.user_playlist(user=user, playlist_id=pid)
-    return render(request, 'tag-and-share.html', {'playlist': playlist})
+
+    tracks = playlist['tracks']['items']
+    tags = suggest_tags(tracks)
+    return render(request, 'tag-and-share.html', {'playlist': playlist,
+                                                  'tags': tags})

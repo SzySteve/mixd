@@ -12,7 +12,7 @@
                     <img src="{{ playlist.images.0.url }}" />
                 </div>
                 <div class="small-12 medium-9 columns">
-                    <h2> {{ playlist.name }}</h2>
+                    <h2>{{ playlist.name }}</h2>
                     <div class="playlist-stats">
                         <span class="playlist-length"><i class="fa fa-clock-o" aria-hidden="true"></i>0:50</span>
                         <span class="playlist-tracks"><i class="fa fa-list" aria-hidden="true"></i>{{ playlist.tracks.total }}</span>
@@ -84,7 +84,14 @@
                 </div><!-- end medium-6 -->
                 <div class="small-12 medium-6 columns">
                     <h5>Drag Tags Here</h5>
-                    <ul id="tag-drop-field" class="sortable"></ul>
+                    <ul id="tag-drop-field" class="sortable">
+                        {% for tag in tags.genre %}
+                            <li>{{ tag.name }}</li>
+                        {% endfor %}
+                        {% for tag in tags.mood %}
+                            <li>{{ tag.name }}</li>
+                        {% endfor %}
+                    </ul>
                 </div>
             </div><!-- end row -->
             <div class="row">
