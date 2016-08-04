@@ -5,6 +5,7 @@ from django.db import models
 TAG_CATEGORY_MOOD = "mood"
 TAG_CATEGORY_GENRE = "genre"
 TAG_CATEGORY_PLACE = "place"
+TAG_CATEGORY_OTHER = "other"
 
 # Create your models here.
 class Playlist(models.Model):

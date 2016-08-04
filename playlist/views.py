@@ -33,6 +33,9 @@ def index(request):
     ids = [p.id for p in raw_playlists]
     playlists = [sp.user_playlist(user=steve_spotify_id, playlist_id=id) for id in ids]
 
+    for playlist in playlists:
+        playlist['owner'] = sp.user(playlist['owner']['id'])
+
     return render(request, 'index.html', {'playlists': playlists})
 
 def detail(request):
@@ -56,6 +59,14 @@ def share(request):
     playlist = sp.user_playlist(user=user, playlist_id=pid)
 
     tracks = playlist['tracks']['items']
-    tags = suggest_tags(tracks)
+    suggested_tags = suggest_tags(tracks)
+
+    # messy as shit i dont like this
+    all_tags = Tag.objects.all()
+    tags = {
+        'mood': all_tags.filter(category=TAG_CATEGORY_MOOD)
+    }
+
     return render(request, 'tag-and-share.html', {'playlist': playlist,
+                                                  'suggested_tags': suggested_tags,
                                                   'tags': tags})
