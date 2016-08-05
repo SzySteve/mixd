@@ -340,10 +340,6 @@ ul.tags li a {
 	text-transform: lowercase;
 }
 
-.playlist ul.tags li a:hover {
-	pointer-events: none;
-}
-
 .playlist-byline {
 	margin-bottom: 0.75rem;
 	overflow: hidden;
@@ -514,9 +510,9 @@ li.track > div {
 	padding: 0.5rem 0.75rem 0;
 }
 
-body.dragging, body.dragging * {
-	cursor: -webkit-grabbing !important;
-}
+/*body.dragging, body.dragging * {*/
+	/*cursor: -webkit-grabbing !important;*/
+/*}*/
 
 .dragged {
 	position: absolute;
@@ -541,9 +537,9 @@ ul.sortable li {
 	border-bottom: 2px solid #00786c;
 }
 
-ul.sortable li:hover {
-	cursor: -webkit-grab;
-}
+/*ul.sortable li:hover {*/
+	/*cursor: -webkit-grab;*/
+/*}*/
 
 ul.sortable li:before {
 	position: absolute;

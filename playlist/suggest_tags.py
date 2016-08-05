@@ -50,7 +50,7 @@ def suggest_audio_features_tags(tracks):
 
     avg_tempo = average_field(audio_features, 'tempo')
     if avg_tempo > 120 and avg_tempo < 150:
-        tags.append(Tag.objects.get(name="Workout", category=TAG_CATEGORY_MOOD))
+        tags.append(Tag.objects.get(name="Roadtrip", category=TAG_CATEGORY_MOOD))
 
     avg_energy = average_field(audio_features, 'energy')
     avg_valence = average_field(audio_features, 'valence')

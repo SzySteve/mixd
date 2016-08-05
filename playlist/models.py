@@ -7,7 +7,12 @@ TAG_CATEGORY_GENRE = "genre"
 TAG_CATEGORY_PLACE = "place"
 TAG_CATEGORY_OTHER = "other"
 
-# Create your models here.
+
+class Tag(models.Model):
+    category = models.CharField(max_length=25)
+    name = models.CharField(max_length=50, unique=True)
+
+
 class Playlist(models.Model):
 
     id = models.CharField(max_length=30, primary_key=True)
@@ -15,12 +20,10 @@ class Playlist(models.Model):
     likes = models.IntegerField(default=0)
     user_id = models.CharField(max_length=30, null=False)
     name = models.CharField(max_length=100, default="")
-
-class Tag(models.Model):
-    category = models.CharField(max_length=25)
-    name = models.CharField(max_length=50, unique=True)
+    tags = models.ManyToManyField(Tag, through="TagInstance")
 
 
 class TagInstance(models.Model):
     tag = models.ForeignKey(Tag)
     playlist = models.ForeignKey(Playlist)
+

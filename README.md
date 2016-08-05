@@ -17,3 +17,7 @@ Playlists can then be searched quickly in a more intuitive way than the native s
 - [ ] Rename views/templates ot make some more sense
 - [ ] Optimize API calls to spotify
 - [ ] Employ DRF to get a really nice search going
+- [ ] Refactor models to use many to many fields for quick filtering
+- [ ] Time duration for playlists and tracks
+
+Thanks to @dansinger, @treemonaco and @exeivot for their work on the UI/UX!

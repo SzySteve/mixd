@@ -37,7 +37,7 @@
                                     </div>
                                     <ul class="tags">
                                         {% for tag in playlist.tags %}
-                                            <li><a href="">{{ tag.tag.name }}</a></li>
+                                            <li><a href="/search?tag={{ tag.tag.name }}">{{ tag.tag.name }}</a></li>
                                         {% endfor %}
                                     </ul>
                                 </div>

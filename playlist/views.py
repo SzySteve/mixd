@@ -1,9 +1,9 @@
-from django.http.response import HttpResponse
+import datetime
 from django.shortcuts import render
 import json
 
 from models import Playlist, Tag, TagInstance, TAG_CATEGORY_MOOD, TAG_CATEGORY_GENRE
-from spotipy_client import sp, steve_spotify_id, playlist_id
+from spotipy_client import sp, steve_spotify_id
 from suggest_tags import suggest_tags
 
 
@@ -85,4 +85,15 @@ def save(request):
     return render(request, 'success.html', {'playlist_id': playlist_id})
 
 def search(request):
-    return render(request, 'search.html', {})
+    tag = request.GET['tag']
+
+    raw_playlists = Playlist.objects.filter(tags__name__exact=tag)
+
+    ids = [p.id for p in raw_playlists]
+    playlists = [sp.user_playlist(user=steve_spotify_id, playlist_id=id) for id in ids]
+
+    for playlist in playlists:
+        playlist['owner'] = sp.user(playlist['owner']['id'])
+        playlist['tags'] = TagInstance.objects.filter(playlist_id=playlist['id'])
+
+    return render(request, 'index.html', {'playlists': playlists})
