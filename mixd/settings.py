@@ -51,7 +51,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'playlists.urls'
+ROOT_URLCONF = 'mixd.urls'
 
 TEMPLATES = [
     {
@@ -77,9 +77,9 @@ TEMPLATES = [
 STATIC_URL = '/static/'
 
 
-STATICFILE_DIRS = ['{}/playlists/static/'.format(BASE_DIR)]
+STATICFILE_DIRS = ['{}/mixd/static/'.format(BASE_DIR)]
 
-WSGI_APPLICATION = 'playlists.wsgi.application'
+WSGI_APPLICATION = 'mixd.wsgi.application'
 
 
 # Database
