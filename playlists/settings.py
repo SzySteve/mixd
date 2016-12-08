@@ -56,7 +56,7 @@ ROOT_URLCONF = 'playlists.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['/Users/steve/git/mixd/templates/'],
+        'DIRS': ['{}/templates/'.format(BASE_DIR)],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -77,7 +77,7 @@ TEMPLATES = [
 STATIC_URL = '/static/'
 
 
-STATICFILE_DIRS = ['/Users/steve/git/mixd/playlists/static/']
+STATICFILE_DIRS = ['{}/playlists/static/'.format(BASE_DIR)]
 
 WSGI_APPLICATION = 'playlists.wsgi.application'
 
@@ -87,8 +87,12 @@ WSGI_APPLICATION = 'playlists.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'django',
+        'USER': 'django',
+        'PASSWORD': 'Ia2Fl00bpq',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 

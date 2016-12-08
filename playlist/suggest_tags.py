@@ -1,24 +1,29 @@
 from collections import Counter, defaultdict
-from spotipy_client import sp
 from models import Tag, TAG_CATEGORY_GENRE, TAG_CATEGORY_MOOD
-
+from spotipy import Spotify
+from spotipy_client import sp_oauth
 
 def get_playlist_genres(tracks, suggestion_count):
     # Pagination should happen, at some point above.
-    artists_dict = defaultdict(lambda: '')
     artists_num_appearances = []
     genres = []
 
+    token = sp_oauth.get_cached_token()['access_token']
+    sp = Spotify(token)
+
+    # Assemble a list of all artists represented.
     for track in tracks:
         for artist in track['track']['artists']:
-            artists_dict[artist['name']] = artist['id']
-            artists_num_appearances.append(artist['name'])
+            artists_num_appearances.append(artist['id'])
+    # Count it
     artists_num_appearances = Counter(artists_num_appearances)
 
-    for aName, _ in artists_num_appearances.most_common(10):
-        artist_info = sp.artist(artists_dict[aName])
+    # Grab the 10 most common artists in the playlist, and get their genres.
+    for artist_id, _ in artists_num_appearances.most_common(10):
+        artist_info = sp.artist(artist_id)
         for genre in artist_info['genres']:
             genres.append(genre)
+    # Count genres
     genre_counter = Counter(genres)
 
     top_n_genres = genre_counter.most_common(suggestion_count)
@@ -41,7 +46,8 @@ def average_field(audio_features, feature):
 
 def suggest_audio_features_tags(tracks):
     tags = []
-    print tracks[0]
+    token = sp_oauth.get_cached_token()['access_token']
+    sp = Spotify(token)
     track_ids = [t['track']['id'] for t in tracks][:min(len(tracks), 100)]
     audio_features = sp.audio_features(tracks=track_ids)
 
@@ -76,4 +82,8 @@ def suggest_tags(tracks):
         'genre': genre_tags,
         'mood': analysis_tags
     }
+
+    # Could do a lot more in here. Could parse playlist name and look for keywords, etc.
+    # Lot of potential fun.
+
     return tags

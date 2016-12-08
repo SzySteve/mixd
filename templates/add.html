@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="small-12 columns">
                     <div id="add-playlist-uri">
-                        <form action="share" method="post">
+                        <form action="/mixd/share" method="post">
                             {% csrf_token %}
                             <input type="text" oninput="handleURIInput(this)" name="uri" placeholder="Paste in your Spotify URI" />
                             <input type="submit" class="button" value="Add Playlist" id="uriSubmit"/>
