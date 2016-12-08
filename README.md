@@ -3,6 +3,8 @@
 mixd is a Spotify playlist sharing service which allows you to tag and describe your playlists, rather than simply titling them.
 Playlists can then be searched quickly in a more intuitive way than the native spotify client allows.
 
+http://www.szysteve.com/mixd/
+
 ### Deployment
 * Clone the repo
 * Launch a tiny Digital Ocean droplet with django set up
@@ -18,11 +20,11 @@ Playlists can then be searched quickly in a more intuitive way than the native s
 - [ ] Rename views/templates to make some more sense
 - [ ] Optimize API calls to spotify
 - [ ] Import DRF for search/filter, pagination, etc.
-- [x] Refactor models to use many to many fields for quick filtering
 - [ ] Time duration for playlists and tracks
 - [ ] Implement 'update on fetch' pattern for playlist metadata
-- [ ] Store CM-type stuff somewhere other than my web server.
 - [ ] Write a makefile or something to ease remote development
     - Scripts for syncing to a remote server, enabling debug mode, etc.
+- [x] Refactor models to use many to many fields for quick filtering
+- [x] Store CM-type stuff somewhere other than my web server.
 
 Thanks to @dansinger, @treemonaco and @exeivot for their work on the UI/UX!
