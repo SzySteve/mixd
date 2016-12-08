@@ -70,7 +70,7 @@ def add(request):
 
 def auth(request):
     auth_url = sp_oauth.get_authorize_url()
-    return render(request, 'auth.html', {'auth_url':auth_url})
+    return render(request, 'auth.html', {'auth_url': auth_url})
 
 def share(request):
     access_token = get_token(request)
@@ -127,7 +127,7 @@ def search(request):
     raw_playlists = Playlist.objects.filter(tags__name__exact=tag)
 
     access_token = sp_oauth.get_cached_token()['access_token']
-    sp = Spotify(token)
+    sp = Spotify(access_token)
 
     playlists = [sp.user_playlist(user=playlist.user_id, playlist_id=playlist.id) for playlist in raw_playlists]
 
