@@ -16,17 +16,19 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+
 import playlist.views as playlist_views
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^$', playlist_views.index),
-    url(r'^playlist_detail', playlist_views.detail),
-    url(r'^add', playlist_views.add),
-    url(r'^save', playlist_views.save),
-    url(r'^search', playlist_views.search),
-    url(r'^share', playlist_views.share),
+    url(r'^mixd/$', playlist_views.list),
+    url(r'^mixd/admin/', admin.site.urls),
+    url(r'^mixd/auth', playlist_views.auth),
+    url(r'^mixd/list', playlist_views.list),
+    url(r'^mixd/playlist_detail', playlist_views.detail),
+    url(r'^mixd/add', playlist_views.add),
+    url(r'^mixd/save', playlist_views.save),
+    url(r'^mixd/search', playlist_views.search),
+    url(r'^mixd/share', playlist_views.share),
     # Development only junk, get rid of these when the app is fully functional.
-    url(r'^playlistseedtags$', playlist_views.seedTags),
-
+    url(r'^mixd/playlistseedtags$', playlist_views.seedTags),
 ]

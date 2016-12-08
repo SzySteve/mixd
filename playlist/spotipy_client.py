@@ -1,13 +1,12 @@
-import spotipy
-from spotipy.util import prompt_for_user_token
+from spotipy import oauth2
 
 # janglin playlist, for testing
 playlist_id = "0kVeqRxyuGuVqBE6LMjoOq"
 
-steve_spotify_id = '1210159879'
+sp_credentials = oauth2.SpotifyClientCredentials()
 
-trevor_spotify_id = "123004043"
-
-token = prompt_for_user_token(steve_spotify_id, 'playlist-modify-public')
-
-sp = spotipy.Spotify(token)
+sp_oauth = oauth2.SpotifyOAuth(sp_credentials.client_id,
+                               sp_credentials.client_secret,
+                               redirect_uri='http://www.szysteve.com/list',
+                               scope='playlist-modify-public',
+                               cache_path='.spotipyoauthcache')

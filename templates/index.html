@@ -30,14 +30,14 @@
                                     </div><!-- end album-cover -->
                                 </div>
                                 <div class="small-9 large-7 columns">
-                                    <h3><a href="playlist_detail?id={{ playlist.id }}">{{ playlist.name }}</a></h3>
+                                    <h3><a href="/mixd/playlist_detail?id={{ playlist.id }}">{{ playlist.name }}</a></h3>
                                     <div class="playlist-stats">
                                         <span class="playlist-tracks"><i class="fa fa-list" aria-hidden="true"></i>{{ playlist.tracks.total }}</span>
                                         <span class="num-follows"><i class="fa fa-plus" aria-hidden="true"></i>{{ playlist.followers.total }}</span>
                                     </div>
                                     <ul class="tags">
                                         {% for tag in playlist.tags %}
-                                            <li><a href="/search?tag={{ tag.tag.name }}">{{ tag.tag.name }}</a></li>
+                                            <li><a href="/mixd/search?tag={{ tag.tag.name }}">{{ tag.tag.name }}</a></li>
                                         {% endfor %}
                                     </ul>
                                 </div>
