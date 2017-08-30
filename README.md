@@ -5,9 +5,7 @@ Playlists can then be searched quickly in a more intuitive way than the native s
 
 ### Deployment
 * Clone the repo
-* Launch a tiny Digital Ocean droplet with django set up
-* Put the repo up there where django apps go
-* Update nginx and gunicorn to point at the app
+* Run this as a django app
     * Make sure to drop `SPOTIPY_` env variabels in gunicorn config.
 
 
