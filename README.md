@@ -3,8 +3,6 @@
 mixd is a Spotify playlist sharing service which allows you to tag and describe your playlists, rather than simply titling them.
 Playlists can then be searched quickly in a more intuitive way than the native spotify client allows.
 
-http://www.szysteve.com/mixd/
-
 ### Deployment
 * Clone the repo
 * Launch a tiny Digital Ocean droplet with django set up
